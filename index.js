@@ -1,56 +1,9 @@
 'use strict'
 
-const Promise = require('bluebird')
 const fs = require('fs')
 const chroma = require('chroma-js')
-const readDir = Promise.promisify(fs.readdir, fs)
-const readFile = Promise.promisify(fs.readFile, fs)
 const _ = require('lodash/core')
-
-const pathOfLibraries = __dirname + '/node_modules/colorly/json'
-
-const getAvaliableLibraries = () => {
-  return readDir(pathOfLibraries).then((data) => {
-    const libs = _.chain(data)
-      .filter((fileName) => {
-        return (fileName.indexOf('.json') !== -1)
-      })
-      .map((val) => {
-        return val.replace('.json', '')
-      })
-      .value()
-    return Promise.resolve(libs)
-  })
-}
-
-const getLibraries = (filter) => {
-  return getAvaliableLibraries().then((libs) => {
-    const filterList = _.isString(filter) ? [filter] : filter
-    return _.chain(libs)
-      .filter((libName) => {
-        return _.chain(filterList).filter((fil) => {
-          return libName.indexOf(fil) !== -1
-        }).size().value()
-      })
-      .value()
-  })
-}
-
-const getLibrariesSource = (libraries) => {
-  const content = {}
-  return Promise.map(libraries, (lib) => {
-    const requiredLib = pathOfLibraries + '/' + lib + '.json'
-    return readFile(requiredLib, 'utf8').then((data) => {
-      content[lib] = _.reduce(JSON.parse(data), (res, val, key) => {
-        res = res || {}
-        res[val.hex] = val
-        return res
-      }, {})
-    })
-  }).then(() => {
-    return content
-  })
-}
+const libraries = require('./libraries.json')
 
 const getClosestColor = (color, baseColors) => {
   // Convert to RGB, then R, G, B
@@ -87,6 +40,19 @@ const getClosestColor = (color, baseColors) => {
   return baseColors[index]
 }
 
+const getLibraries = (filter) => {
+  return _.reduce(libraries, (res, val, name) => {
+    res = res || {}
+    const filterOk = _.chain(filter).filter((fil) => {
+      return name.indexOf(fil) !== -1
+    }).size().value()
+    if (filterOk) {
+      res[name] = val
+    }
+    return res
+  }, {})
+}
+
 const getClosestColors = (source, color) => {
   const matches = []
   _.each(source, (lib, name) => {
@@ -96,7 +62,7 @@ const getClosestColors = (source, color) => {
     closestLibColor.library = name
     matches.push(closestLibColor)
   })
-  return Promise.resolve(matches)
+  return matches
 }
 
 const color2lib = (options, callback) => {
@@ -104,12 +70,8 @@ const color2lib = (options, callback) => {
     color: '#ffffff',
     libraries: []
   })
-  getLibraries(options.libraries).then((libraries) => {
-    return getLibrariesSource(libraries).then((source) => {
-      return getClosestColors(source, options.color)
-    })
-  }).then(callback)
-
+  const libraries = getLibraries(options.libraries)
+  callback(getClosestColors(libraries, options.color))
 }
 
 module.exports = color2lib

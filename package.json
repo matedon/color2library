@@ -4,7 +4,8 @@
   "description": "Get a color and find from a  comprehensive library of color books from Pantone, ANPA, HKS, DIC, Focoltone, TOYO, and TRUMATCH",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node build.js",
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -29,9 +30,10 @@
   },
   "homepage": "https://github.com/matedon/color2library#readme",
   "dependencies": {
-    "bluebird": "^3.4.6",
     "chroma-js": "^1.2.1",
-    "colorly": "0.0.2",
     "lodash": "^4.16.0"
+  },
+  "devDependencies": {
+    "colorly": "0.0.2"
   }
 }

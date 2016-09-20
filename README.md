@@ -3,6 +3,8 @@
 What if you have a color but you need the closest one from a color library? For example Panonte?
 You can find the most fitting color from a comprehensive library of color books from Pantone, ANPA, HKS, DIC, Focoltone, TOYO, and TRUMATCH.
 
+This module compatible with browserify too.
+
 ## Usage
 
 ```js
@@ -16,9 +18,22 @@ color2lib({
 })
 ```
 
-## How it Works
+## Build
 
+Colorly.js containts all of the required color books, but we need to merge them in one json file with some modifications.
+You only have to run that if Colorly.js module updated.
 
+```sh
+npm build
+```
+
+## Test
+
+This is not a feature test. Just a simple test for color matching, with console output.
+
+```sh
+npm test
+```
 
 ## Dependencies
 
