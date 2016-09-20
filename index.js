@@ -41,6 +41,9 @@ const getClosestColor = (color, baseColors) => {
 }
 
 const getLibraries = (filter) => {
+  if (!(_.isArray(filter) && _.size(filter))) {
+    return libraries
+  }
   return _.reduce(libraries, (res, val, name) => {
     res = res || {}
     const filterOk = _.chain(filter).filter((fil) => {
