@@ -1,0 +1,37 @@
+{
+  "name": "color2library",
+  "version": "1.0.0",
+  "description": "Get a color and find from a  comprehensive library of color books from Pantone, ANPA, HKS, DIC, Focoltone, TOYO, and TRUMATCH",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matedon/color2library.git"
+  },
+  "keywords": [
+    "color",
+    "convert",
+    "chroma",
+    "pantone",
+    "anpa",
+    "hks",
+    "dic",
+    "focoltone",
+    "toyo",
+    "trumatch"
+  ],
+  "author": "matedon.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matedon/color2library/issues"
+  },
+  "homepage": "https://github.com/matedon/color2library#readme",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "chroma-js": "^1.2.1",
+    "colorly": "0.0.2",
+    "lodash": "^4.16.0"
+  }
+}
