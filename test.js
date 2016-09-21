@@ -1,6 +1,6 @@
-const color2lib = require('./index.js')
+const color2library = require('./index.js')
 
-color2lib({
+color2library({
   libraries: ['pantone'],
   color: '#8faabd'
 }, (colors) => {

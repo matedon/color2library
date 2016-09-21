@@ -8,15 +8,20 @@ This module compatible with browserify too.
 ## Usage
 
 ```js
-const color2lib = require("color2library")
+const color2library = require("color2library")
 
-color2lib({
+color2library({
   libraries: ['pantone'],
   color: '#8faabd'
 }, (colors) => {
   console.log(colors)
 })
 ```
+
+## Options
+
+libraries: array of color books; you can give the part of the names for example ['anpa', 'hks', 'pantone', 'toyo', 'trumatch']
+color: this is the color to search from color books
 
 ## Build
 
