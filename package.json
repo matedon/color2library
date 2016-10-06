@@ -1,6 +1,6 @@
 {
   "name": "color2library",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "Get a color and find from a  comprehensive library of color books from Pantone, ANPA, HKS, DIC, Focoltone, TOYO, and TRUMATCH",
   "main": "index.js",
   "scripts": {
